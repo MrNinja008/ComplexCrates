@@ -3,11 +3,9 @@
 namespace OguzhanUmutlu\ComplexCrates;
 
 use muqsit\invmenu\InvMenuHandler;
-use muqsit\invmenu\session\PlayerManager;
 use pocketmine\plugin\PluginBase;
 use dktapps\pmforms\BaseForm;
 use pocketmine\utils\Config;
-use pocketmine\utils\TextFormat;
 
 class ComplexCrates extends PluginBase {
     const COLOR = "§";
