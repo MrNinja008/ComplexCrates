@@ -26,7 +26,7 @@ class CrateManager {
         if(!in_array($name, $this->getAllCrateNames())) return;
         $crateData = $this->getAllCrates()[array_search($name, $this->getAllCrateNames())];
         $crate = $crateData["pos"];
-        $particle = new FloatingTextParticle(new Vector3($crate["x"]+.5, $crate["y"]+1.75, $crate["z"]+.5), str_replace(["%0", "{line}"], [$name, "\n"], $this->plugin->getLanguageManager()->translate("floating-text")));
+        $particle = new FloatingTextParticle(new Vector3($crate["x"]+.5, $crate["y"]+1, $crate["z"]+.5), str_replace(["%0", "{line}"], [$name, "\n"], $this->plugin->getLanguageManager()->translate("floating-text")));
         if(!$this->plugin->getServer()->isLevelGenerated($crate["level"])) return;
         if(!$this->plugin->getServer()->isLevelLoaded($crate["level"])) {
             $this->plugin->getServer()->loadLevel($crate["level"]);
