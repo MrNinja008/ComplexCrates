@@ -59,6 +59,6 @@ class ComplexCrates extends PluginBase {
         return $this->menuManager;
     }
     public function formatColor(string $text): string {
-        return TextFormat::colorize($text, self::COLOR);
+        return str_replace("&", self::COLOR, $text);
     }
 }
