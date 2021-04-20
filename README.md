@@ -19,7 +19,7 @@ Sub commands:
 # TODO
 - adding more languages
 - there can be some bugfixes but i dont think so
-- custom language ? maybe?
+- custom language file ? maybe?
 
 # Reporting bugs
 **You may open an issue on the floating text GitHub repository for report bugs**
