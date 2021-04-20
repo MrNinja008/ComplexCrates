@@ -20,6 +20,7 @@ Sub commands:
 - adding more languages
 - there can be some bugfixes but i dont think so
 - custom language file ? maybe?
+- API? maaybe if they want
 
 # Reporting bugs
 **You may open an issue on the floating text GitHub repository for report bugs**
