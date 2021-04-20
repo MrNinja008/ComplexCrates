@@ -70,13 +70,8 @@ class EventListener implements Listener {
                 $item->setCompoundTag($n["nbt"]);
                 return $item;
             }, $crate["items"]);
-            var_dump(!$e->getItem() instanceof TripwireHook);
-            var_dump(!is_array($e->getItem()->getLore()));
-            var_dump(!isset($e->getItem()->getLore()[0]));
-            var_dump($e->getItem()->getLore()[0] != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-lore")));
-            var_dump($e->getItem()->getCustomName() != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-name")));
             if($e->getItem()->getId() != 131 || !is_array($e->getItem()->getLore()) || !isset($e->getItem()->getLore()[0]) || $e->getItem()->getLore()[0] != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-lore")) || $e->getItem()->getCustomName() != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-name"))) {
-                $player->sendMessage($this->plugin->getLanguageManager()->translate("key-missing", ["%0" => $crate["name"]]));
+                $this->plugin->getMenuManager()->previewCrate($items, $player);
                 return;
             }
             if(!$this->plugin->getConfig()->getNested("crate-access") && isset($this->cratedat[$crate["name"]])) {

@@ -21,6 +21,7 @@ class MenuManager {
         for($i=0;$i<27;$i++){
             if($i != 13)$menu->getInventory()->setItem($i, new Item(ItemIds::STAINED_GLASS_PANE, rand(0, 15)));
         }
+        $menu->setName(" ");
         $menu->setListener(InvMenu::readonly(function (DeterministicInvMenuTransaction $transaction) : void {}));
         $menu->setInventoryCloseListener(function(Player $player, InvMenuInventory $inventory)use($menu){
             if(isset($this->playerdat[$player->getName()])) {
@@ -28,6 +29,13 @@ class MenuManager {
             }
         });
         return $menu;
+    }
+    public function previewCrate(array $items, Player $player) {
+        $menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
+        $menu->getInventory()->setContents($items);
+        $menu->setListener(InvMenu::readonly(function (DeterministicInvMenuTransaction $transaction) : void {}));
+        $menu->setName(" ");
+        $menu->send($player);
     }
 
     public function start(InvMenu $menu, array $items, Player $player) {

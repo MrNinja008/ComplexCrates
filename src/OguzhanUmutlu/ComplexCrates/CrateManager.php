@@ -5,8 +5,9 @@ namespace OguzhanUmutlu\ComplexCrates;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
+use pocketmine\level\particle\FloatingTextParticle;
 use pocketmine\level\Position;
-use pocketmine\network\mcpe\protocol\types\Enchant;
+use pocketmine\math\Vector3;
 use pocketmine\Player;
 
 class CrateManager {
@@ -14,13 +15,55 @@ class CrateManager {
     private $crates;
     private $cratesConfig;
     private $languageManager;
+    private $floatingtexts = [];
     public function __construct(ComplexCrates $plugin) {
         $this->plugin = $plugin;
         $this->cratesConfig = $this->plugin->getCrateConfig();
         $this->crates = $this->cratesConfig->getAll();
         $this->languageManager = $this->plugin->getLanguageManager();
     }
-
+    public function createFloatingText(string $name) {
+        if(!in_array($name, $this->getAllCrateNames())) return;
+        $crateData = $this->getAllCrates()[array_search($name, $this->getAllCrateNames())];
+        $crate = $crateData["pos"];
+        $particle = new FloatingTextParticle(new Vector3($crate["x"], $crate["y"], $crate["z"]), str_replace("%0", $name, $this->plugin->getLanguageManager()->translate("")));
+        if(!$this->plugin->getServer()->isLevelGenerated($crate["level"])) return;
+        if(!$this->plugin->getServer()->isLevelLoaded($crate["level"])) {
+            $this->plugin->getServer()->loadLevel($crate["level"]);
+        }
+        $level = $this->plugin->getServer()->getLevelByName($crate["level"]);
+        if(!$level->isChunkLoaded($crate["x"] >> 4, $crate["z"] >> 4)) {
+            $level->loadChunk($crate["x"] >> 4, $crate["z"] >> 4);
+        }
+        $level->addParticle($particle);
+        $this->floatingtexts[] = ["crate" => $crateData, "particle" => $particle];
+    }
+    public function getFloatingText(string $name): array {
+        $result = null;
+        foreach($this->floatingtexts as $floatingtext) {
+            if($floatingtext["crate"]["name"] == $name) {
+                $result = $floatingtext;
+            }
+        }
+        return $result;
+    }
+    public function removeFloatingText(string $name) {
+        if(!$this->getFloatingText($name)) return;
+        $dat = $this->getFloatingText($name);
+        $ft = $dat["particle"];
+        if(!$ft instanceof FloatingTextParticle) return;
+        $pos = $dat["crate"]["pos"];
+        if(!$this->plugin->getServer()->isLevelGenerated($pos["level"])) return;
+        if(!$this->plugin->getServer()->isLevelLoaded($pos["level"])) {
+            $this->plugin->getServer()->loadLevel($pos["level"]);
+        }
+        $level = $this->plugin->getServer()->getLevelByName($pos["level"]);
+        if(!$level->isChunkLoaded($pos["x"] >> 4, $pos["z"] >> 4)) {
+            $level->loadChunk($pos["x"] >> 4, $pos["z"] >> 4);
+        }
+        $ft->setInvisible(true);
+        $level->addParticle($ft);
+    }
     public function getAllCrates(): array {
         return $this->crates;
     }
@@ -42,24 +85,13 @@ class CrateManager {
         $this->cratesConfig->setAll($this->crates);
         $this->cratesConfig->save();
         $this->cratesConfig->reload();
+        $this->createFloatingText($name);
         return $this->languageManager->translate("command-create-success");
     }
     public function editCrate(string $name, Position $pos, array $items): string {
         if(!in_array($name, $this->getAllCrateNames())) return $this->languageManager->translate("crate-not-found", ["%0" => $name]);
         $this->removeCrate($name);
-        $this->crates[] = [
-            "name" => $name,
-            "pos" => [
-                "x" => $pos->getFloorX(),
-                "y" => $pos->getFloorY(),
-                "z" => $pos->getFloorZ(),
-                "level" => $pos->getLevel()->getFolderName()
-            ],
-            "items" => $items
-        ];
-        $this->cratesConfig->setAll($this->crates);
-        $this->cratesConfig->save();
-        $this->cratesConfig->reload();
+        $this->createCrate($name, $pos, $items);
         return $this->languageManager->translate("command-edit-success");
     }
     public function removeCrate(string $name): string {
@@ -68,6 +100,7 @@ class CrateManager {
         $this->cratesConfig->setAll($this->crates);
         $this->cratesConfig->save();
         $this->cratesConfig->reload();
+        $this->removeFloatingText($name);
         return $this->languageManager->translate("command-remove-success");
     }
     public function giveKey($player, string $crate): string {

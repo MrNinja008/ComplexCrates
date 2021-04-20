@@ -35,6 +35,9 @@ class ComplexCrates extends PluginBase {
         $this->menuManager = new MenuManager($this);
         $this->getServer()->getCommandMap()->register($this->getName(), $this->crateCommand);
         $this->getServer()->getPluginManager()->registerEvents($this->eventListener, $this);
+        foreach($this->getCrateManager()->getAllCrateNames() as $x) {
+            $this->getCrateManager()->createFloatingText($x);
+        }
     }
     public function getEventListener(): EventListener {
         return $this->eventListener;

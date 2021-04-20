@@ -7,8 +7,10 @@ command-cancel: "&a> Komut başarıyla iptal edildi."
 crate-not-found: "&c> %0 adlı kasa bulunamadı."
 someone-is-using: "&c> Bu kasa şuan &b%0&c adlı oyuncu tarafından açılıyor."
 already-using: "&c> Zaten bir kasa açıyorsun."
-key-missing: "&c> Lütfen &b%0&c anahtarını tut!"
 no-crates: "&c> Hiç kasa yok."
+floating-text: "&e> %0 Kasası
+Açmak için anahtarla tıkla
+Görüntülemek için anahtarsız tıkla"
 
 item-name: "&r&a&b%0&e Anahtarı"
 item-lore: "&r&eBu anahtarı kullanarak &b%0&e kasasını açabilirsin."
