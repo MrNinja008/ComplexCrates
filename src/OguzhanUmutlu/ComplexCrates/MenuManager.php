@@ -41,7 +41,7 @@ class MenuManager {
     public function start(InvMenu $menu, array $items, Player $player, $crate) {
         $menu->send($player);
         $this->playerdat[$player->getName()] = true;
-        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask($menu, $items, $player, $crate, $this), 5);
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new WaiTask($menu, $items, $player, $crate, $this), 5);
     }
     public function change(InvMenu $menu, array $items): InvMenu {
         for($i=0;$i<27;$i++){

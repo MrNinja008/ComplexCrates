@@ -1,6 +1,8 @@
 <?php
 
 namespace OguzhanUmutlu\ComplexCrates;
+use pocketmine\level\sound\FizzSound;
+use pocketmine\Player;
 use pocketmine\scheduler\Task;
 
 class WaiTask extends Task {
@@ -10,7 +12,7 @@ class WaiTask extends Task {
     private $crate;
     private $repeat;
     private $th;
-    public function __construct($menu, $items, $player, $crate, MenuManager $th) {
+    public function __construct($menu, $items, Player $player, $crate, MenuManager $th) {
         $this->menu = $menu;
         $this->items = $items;
         $this->player = $player;

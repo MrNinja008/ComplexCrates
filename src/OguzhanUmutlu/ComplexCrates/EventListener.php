@@ -3,9 +3,11 @@
 namespace OguzhanUmutlu\ComplexCrates;
 
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\item\Item;
 use pocketmine\Player;
 
@@ -25,6 +27,21 @@ class EventListener implements Listener {
     public function setEditBreakPlayer($playerName, string $crateName) {
         if($playerName instanceof Player) $playerName = $playerName->getName();
         $this->editBreak[$playerName] = $crateName;
+    }
+    public function onPlayerJoin(PlayerJoinEvent $e) {
+        foreach($this->plugin->getCrateManager()->getAllCrates() as $x) {
+            if($this->plugin->getCrateManager()->getFloatingText($x["name"])) {
+                $this->plugin->getCrateManager()->removeFloatingText($x["name"]);
+            }
+            $this->plugin->getCrateManager()->createFloatingText($x["name"]);
+        }
+    }
+    public function onBlockPlace(BlockPlaceEvent $e) {
+        $item = $e->getItem();
+        $block = $e->getBlock();
+        $player = $e->getPlayer();
+        if($e->getItem()->getId() != 131 || !is_array($e->getItem()->getLore()) || !isset($e->getItem()->getLore()[0]) || $e->getItem()->getLore()[0] != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-lore")) || $e->getItem()->getCustomName() != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-name"))) return;
+        $e->setCancelled(true);
     }
     public function onBlockBreak(BlockBreakEvent $e) {
         $crates = $this->plugin->getCrateManager()->getAllCrates();
