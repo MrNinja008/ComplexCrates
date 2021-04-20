@@ -1,0 +1,18 @@
+---
+form-enabled: true
+
+# Language of the plugin: en_US, tr_TR
+language: en_US
+
+# Options: yaml, json, properties
+data-type: yaml
+
+# Can more than one player open same crate?
+crate-access: false
+
+crate-command:
+  name: "crate"
+  description: "Manage crates"
+  aliases:
+    - "crates"
+...

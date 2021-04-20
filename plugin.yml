@@ -1,0 +1,24 @@
+name: ComplexCrates
+description: Best configurable crate plugin
+main: OguzhanUmutlu\ComplexCrates\ComplexCrates
+api: 3.0.0
+version: 1.0.0
+
+permissions:
+  complexcrates:
+    description: "ComplexCrates main permission"
+    default: op
+    children:
+      complexcrates.command:
+        description: "ComplexCrates command permission"
+        default: op
+        children:
+          complexcrates.command.create:
+            description: "ComplexCrates create sub command permission"
+            default: op
+          complexcrates.command.remove:
+            description: "ComplexCrates remove sub command permission"
+            default: op
+          complexcrates.command.list:
+            description: "ComplexCrates list sub command permission"
+            default: op
