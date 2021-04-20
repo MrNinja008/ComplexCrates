@@ -22,3 +22,9 @@ permissions:
           complexcrates.command.list:
             description: "ComplexCrates list sub command permission"
             default: op
+          complexcrates.command.givekey:
+            description: "ComplexCrates list givekey command permission"
+            default: op
+          complexcrates.command.givekey-all:
+            description: "ComplexCrates list givekey-all command permission"
+            default: op
