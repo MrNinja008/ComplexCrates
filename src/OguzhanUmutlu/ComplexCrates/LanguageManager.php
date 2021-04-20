@@ -7,7 +7,9 @@ class LanguageManager {
     private $languageFile;
     public function __construct(ComplexCrates $plugin) {
         $this->plugin = $plugin;
-        $this->languageFile = yaml_parse(stream_get_contents($this->plugin->getResource("languages/".$this->getLanguage().".yml")));;
+        $stream = $this->plugin->getResource("languages/".$this->getLanguage().".yml");
+        $this->languageFile = yaml_parse(stream_get_contents($stream));
+        fclose($stream);
     }
     public function getLanguage(): string {
         return $this->plugin->getConfig()->getNested("language");
