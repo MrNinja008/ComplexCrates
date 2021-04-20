@@ -38,57 +38,10 @@ class MenuManager {
         $menu->send($player);
     }
 
-    public function start(InvMenu $menu, array $items, Player $player) {
+    public function start(InvMenu $menu, array $items, Player $player, $crate) {
         $menu->send($player);
         $this->playerdat[$player->getName()] = true;
-        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-            $this->change($menu, $items);
-            $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                $this->change($menu, $items);
-                $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                    $this->change($menu, $items);
-                    $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                        $this->change($menu, $items);
-                        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                            $this->change($menu, $items);
-                            $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                $this->change($menu, $items);
-                                $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                    $this->change($menu, $items);
-                                    $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                        $this->change($menu, $items);
-                                        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                            $this->change($menu, $items);
-                                            $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                $this->change($menu, $items);
-                                                $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                    $this->change($menu, $items);
-                                                    $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                        $this->change($menu, $items);
-                                                        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                            $this->change($menu, $items);
-                                                            $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                                $this->change($menu, $items);
-                                                                $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask(function()use($menu,$items,$player){
-                                                                    $this->change($menu, $items);
-                                                                    $player->getInventory()->addItem($menu->getInventory()->getItem(13));
-                                                                    unset($this->playerdat[$player->getName()]);
-                                                                    $player->removeWindow($menu->getInventory());
-                                                                }), 20);
-                                                            }), 15);
-                                                        }), 10);
-                                                    }), 10);
-                                                }), 5);
-                                            }), 5);
-                                        }), 5);
-                                    }), 5);
-                                }), 5);
-                            }), 5);
-                        }), 5);
-                    }), 5);
-                }), 5);
-            }), 5);
-        }), 5);
+        $this->plugin->getScheduler()->scheduleDelayedTask(new WaiTask($menu, $items, $player, $crate, $this), 5);
     }
     public function change(InvMenu $menu, array $items): InvMenu {
         for($i=0;$i<27;$i++){
@@ -100,5 +53,12 @@ class MenuManager {
     public function getPlayerDat($player): bool {
         if($player instanceof Player) $player = $player->getName();
         return isset($this->playerdat[$player]);
+    }
+    public function unsetPlayerDat($player) {
+        if($player instanceof Player) $player = $player->getName();
+        if($this->getPlayerDat($player)) unset($this->playerdat[$player]);
+    }
+    public function getPlugin(): ComplexCrates {
+        return $this->plugin;
     }
 }

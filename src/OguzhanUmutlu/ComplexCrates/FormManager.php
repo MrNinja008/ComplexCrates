@@ -83,7 +83,7 @@ class FormManager {
                 new Dropdown("crate", $this->languageManager->translate("command-editmenu-name"), $crates, 0)
             ],
             function(Player $player, CustomFormResponse $data)use($crates): void {
-                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-edit")." ".$crates[$data->getInt("crate")]);
+                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-edit")." ".$crates[array_keys($crates)[$data->getInt("crate")]]);
             },
             function(Player $player): void {
                 $player->sendMessage($this->languageManager->translate("menu-exit-message"));
@@ -98,7 +98,7 @@ class FormManager {
                 new Dropdown("crate", $this->languageManager->translate("command-removemenu-name"), $crates, 0)
             ],
             function(Player $player, CustomFormResponse $data) use($crates): void {
-                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-remove")." ".$crates[$data->getInt("crate")]);
+                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-remove")." ".$crates[array_keys($crates)[$data->getInt("crate")]]);
             },
             function(Player $player): void {
                 $player->sendMessage($this->languageManager->translate("menu-exit-message"));
@@ -118,7 +118,7 @@ class FormManager {
                 new Dropdown("player", $this->languageManager->translate("command-givekeymenu-player"), $players, 0)
             ],
             function(Player $player, CustomFormResponse $data)use($players,$crates): void {
-                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-givekey")." ".$players[$data->getInt("player")]." ".$crates[$data->getInt("crate")]);
+                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-givekey")." ".$players[$data->getInt("player")]." ".$crates[array_keys($crates)[$data->getInt("crate")]]);
             },
             function(Player $player): void {
                 $player->sendMessage($this->languageManager->translate("menu-exit-message"));
@@ -133,7 +133,7 @@ class FormManager {
                 new Dropdown("crate", $this->languageManager->translate("command-givekeyallmenu-name"), $crates, 0)
             ],
             function(Player $player, CustomFormResponse $data)use($crates): void {
-                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-givekeyall")." ".$crates[$data->getInt("crate")]);
+                $player->chat("/".$this->plugin->getCrateCommand()->getName()." ".$this->languageManager->translate("command-subcommands-givekeyall")." ".$crates[array_keys($crates)[$data->getInt("crate")]]);
             },
             function(Player $player): void {
                 $player->sendMessage($this->languageManager->translate("menu-exit-message"));

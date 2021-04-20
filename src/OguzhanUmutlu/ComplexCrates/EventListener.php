@@ -2,7 +2,6 @@
 
 namespace OguzhanUmutlu\ComplexCrates;
 
-use pocketmine\block\TripwireHook;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
@@ -84,8 +83,11 @@ class EventListener implements Listener {
             }
             $this->cratedat[$crate["name"]] = $player->getName();
             $player->getInventory()->removeItem($this->plugin->getCrateManager()->getKey($crate["name"]));
-            $this->plugin->getMenuManager()->start($this->plugin->getMenuManager()->create(), $items, $player);
+            $this->plugin->getMenuManager()->start($this->plugin->getMenuManager()->create(), $items, $player, $crate);
         }
+    }
+    public function delCrateDat($crate) {
+        unset($this->cratedat[$crate]);
     }
     public function onChat(PlayerChatEvent $e) {
         $player = $e->getPlayer();
