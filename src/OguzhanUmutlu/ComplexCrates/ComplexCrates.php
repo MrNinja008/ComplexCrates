@@ -7,6 +7,7 @@ use muqsit\invmenu\session\PlayerManager;
 use pocketmine\plugin\PluginBase;
 use dktapps\pmforms\BaseForm;
 use pocketmine\utils\Config;
+use pocketmine\utils\TextFormat;
 
 class ComplexCrates extends PluginBase {
     const COLOR = "§";
@@ -58,6 +59,6 @@ class ComplexCrates extends PluginBase {
         return $this->menuManager;
     }
     public function formatColor(string $text): string {
-        return str_replace("&", self::COLOR, $text);
+        return TextFormat::colorize($text, self::COLOR);
     }
 }
