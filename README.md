@@ -23,5 +23,5 @@ Sub commands:
 - API? maaybe if they want
 
 # Reporting bugs
-**You may open an issue on the floating text GitHub repository for report bugs**
+**You may open an issue on the ComplexCrates GitHub repository for report bugs**
 https://github.com/OguzhanUmutlu/ComplexCrates/issues
