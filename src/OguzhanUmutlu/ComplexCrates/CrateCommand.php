@@ -24,6 +24,10 @@ class CrateCommand extends Command {
         }
         if(!isset($args[0])) $args[0] = "";
         if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-create")) {
+            if(!$sender->hasPermission("complexcrates.command.create")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             if($this->plugin->form == ComplexCrates::FORM_PMFORMS && $sender instanceof Player && !isset($args[1])) {
                 $sender->sendForm($this->plugin->getFormManager()->createMenu());
                 return;
@@ -35,6 +39,10 @@ class CrateCommand extends Command {
             $this->plugin->getEventListener()->setCreateBreakPlayer($sender, $args[1]);
             $sender->sendMessage($this->plugin->getLanguageManager()->translate("command-create-breakcrate"));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-edit")) {
+            if(!$sender->hasPermission("complexcrates.command.edit")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             if(empty($this->plugin->getCrateManager()->getAllCrateNames())) {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-crates"));
                 return;
@@ -50,6 +58,10 @@ class CrateCommand extends Command {
             $this->plugin->getEventListener()->setEditBreakPlayer($sender, $args[1]);
             $sender->sendMessage($this->plugin->getLanguageManager()->translate("command-edit-breakcrate"));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-remove")) {
+            if(!$sender->hasPermission("complexcrates.command.remove")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             if(empty($this->plugin->getCrateManager()->getAllCrateNames())) {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-crates"));
                 return;
@@ -64,8 +76,16 @@ class CrateCommand extends Command {
             }
             $sender->sendMessage($this->plugin->getCrateManager()->removeCrate($args[1]));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-list")) {
+            if(!$sender->hasPermission("complexcrates.command.list")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             $sender->sendMessage($this->plugin->getLanguageManager()->translate("command-list-message", ["%0" => count($this->plugin->getCrateManager()->getAllCrateNames()), "%1" => implode(", ", $this->plugin->getCrateManager()->getAllCrateNames())]));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-givekey")) {
+            if(!$sender->hasPermission("complexcrates.command.givekey")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             if(empty($this->plugin->getCrateManager()->getAllCrateNames())) {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-crates"));
                 return;
@@ -84,6 +104,10 @@ class CrateCommand extends Command {
             }
             $sender->sendMessage($this->plugin->getCrateManager()->giveKey($args[1], $args[2]));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-givekeyall")) {
+            if(!$sender->hasPermission("complexcrates.command.givekey-all")) {
+                $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-perm"));
+                return;
+            }
             if(empty($this->plugin->getCrateManager()->getAllCrateNames())) {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("no-crates"));
                 return;
