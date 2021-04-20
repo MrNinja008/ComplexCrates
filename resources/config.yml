@@ -1,7 +1,11 @@
 ---
 form-enabled: true
 
-# Language of the plugin: en_US, tr_TR
+# Language of the plugin:
+# en_US: https://github.com/OguzhanUmutlu
+# tr_TR: https://github.com/OguzhanUmutlu
+# zh_CN: https://github.com/Endermanbugzjfc
+# zh_TW: https://github.com/Endermanbugzjfc
 language: en_US
 
 # Options: yaml, json, properties
