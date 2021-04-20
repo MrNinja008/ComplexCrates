@@ -9,9 +9,7 @@ someone-is-using: "&c> This crate is being used by &b%0&c."
 already-using: "&c> You are already opening a crate."
 key-missing: "&c> Please hold &b%0&c key!"
 no-crates: "&c> There are no crates."
-floating-text: "&e> %0 Crate
-To open crate click with key
-To preview crate click without key"
+floating-text: "&e> %0 Crate{line}To open crate click with key{line}To preview crate click without key"
 
 item-name: "&r&a&b%0&e Key"
 item-lore: "&r&eYou can open &b%0&e crate with this."
