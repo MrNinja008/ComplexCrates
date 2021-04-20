@@ -24,4 +24,4 @@ Sub commands:
 
 # Reporting bugs
 **You may open an issue on the floating text GitHub repository for report bugs**
-https://github.com/OguzhanUmutlu/DynamicFT/issues
+https://github.com/OguzhanUmutlu/ComplexCrates/issues
