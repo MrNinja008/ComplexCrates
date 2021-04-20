@@ -9,7 +9,9 @@ someone-is-using: "&c> 这个抽奖箱已被 &b%0&c 使用。"
 already-using: "&c> 您现在正开启另一个抽奖箱。"
 key-missing: "&c> 请手持抽奖箱&b「 %0 」&c的钥匙！"
 no-crates: "&c> 这里没有任何抽奖箱。"
-floating-text: "&e> 抽奖箱「 %0 」{line}手持钥匙点击抽奖箱即可开启抽奖箱{line}空手点击抽奖箱可查看能于此抽奖箱抽到的物品"
+floating-text: "&e> 抽奖箱「 %0 」
+手持钥匙点击抽奖箱即可开启抽奖箱
+空手点击抽奖箱可查看能于此抽奖箱抽到的物品"
 
 item-name: "&r抽奖箱&a&b「 %0 」&e的钥匙"
 item-lore: "&r&e此钥匙可开启的抽奖箱： &b%0&e"

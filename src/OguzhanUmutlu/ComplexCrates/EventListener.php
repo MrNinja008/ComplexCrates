@@ -40,8 +40,11 @@ class EventListener implements Listener {
         $item = $e->getItem();
         $block = $e->getBlock();
         $player = $e->getPlayer();
-        if($e->getItem()->getId() != 131 || !is_array($e->getItem()->getLore()) || !isset($e->getItem()->getLore()[0]) || $e->getItem()->getLore()[0] != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-lore")) || $e->getItem()->getCustomName() != str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-name"))) return;
-        $e->setCancelled(true);
+        foreach($this->plugin->getCrateManager()->getAllCrates() as $crate) {
+            if($e->getItem()->getId() == 131 && is_array($e->getItem()->getLore()) && isset($e->getItem()->getLore()[0]) && $e->getItem()->getLore()[0] == str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-lore")) && $e->getItem()->getCustomName() == str_replace("%0", $crate["name"], $this->plugin->getLanguageManager()->translate("item-name"))) {
+                $e->setCancelled(true);
+            }
+        }
     }
     public function onBlockBreak(BlockBreakEvent $e) {
         $crates = $this->plugin->getCrateManager()->getAllCrates();
