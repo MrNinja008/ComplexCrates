@@ -22,7 +22,7 @@ class ComplexCrates extends PluginBase {
     public function onEnable() {
         if($this->getConfig()->getNested("form-enabled") && class_exists(BaseForm::class)) {
             $this->form = self::FORM_PMFORMS;
-            $this->getLogger()->info($this->formatColor("&ePMForms found, PMForms will be used for commands."));
+            //$this->getLogger()->info($this->formatColor("&ePMForms found, PMForms will be used for commands."));
         }
         if(class_exists(InvMenuHandler::class) && !InvMenuHandler::isRegistered()) InvMenuHandler::register($this);
         $this->eventListener = new EventListener($this);
