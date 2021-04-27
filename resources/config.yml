@@ -6,6 +6,7 @@ form-enabled: true
 # tr_TR: https://github.com/OguzhanUmutlu
 # zh_CN: https://github.com/Endermanbugzjfc
 # zh_TW: https://github.com/Endermanbugzjfc
+# rus_RUS: https://github.com/kostamax27
 language: en_US
 
 # Options: yaml, json, properties
