@@ -2,7 +2,7 @@ name: ComplexCrates
 description: Best configurable crate plugin
 main: OguzhanUmutlu\ComplexCrates\ComplexCrates
 api: 3.0.0
-version: 1.0.0-dev
+version: 1.0.1
 
 permissions:
   complexcrates:
