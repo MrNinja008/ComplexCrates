@@ -21,7 +21,7 @@ class WaiTask extends Task {
         $this->th = $th;
     }
     public function onRun(int $currentTick) {
-        if($this->repeat > 10) {
+        if($this->repeat > 10 || !$this->player) {
             $this->getHandler()->cancel();
             return;
         }
