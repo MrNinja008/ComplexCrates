@@ -2,14 +2,24 @@
 
 namespace OguzhanUmutlu\ComplexCrates;
 
+use pocketmine\utils\Config;
+
 class LanguageManager {
     private $plugin;
     private $languageFile;
     public function __construct(ComplexCrates $plugin) {
         $this->plugin = $plugin;
-        $stream = $this->plugin->getResource("languages/".$this->getLanguage().".yml");
-        $this->languageFile = yaml_parse(stream_get_contents($stream));
-        fclose($stream);
+        foreach([
+            "en_US",
+            "ko_KR",
+            "rus_RUS",
+            "tr_TR",
+            "zh_CN",
+            "zh_TW"
+        ] as $lang) {
+            $this->plugin->saveResource("languages/".$lang.".yml");
+        }
+        $this->languageFile = (new Config($this->plugin->getDataFolder().$this->getLanguage().".yml"))->getAll();
     }
     public function getLanguage(): string {
         return $this->plugin->getConfig()->getNested("language");
