@@ -35,7 +35,7 @@ class CrateManager {
         if(!$level->isChunkLoaded($crate["x"] >> 4, $crate["z"] >> 4)) {
             $level->loadChunk($crate["x"] >> 4, $crate["z"] >> 4);
         }
-        $level->addParticle($particle);
+        $level->addParticle($particle, $level->getPlayers());
         $this->floatingtexts[] = ["crate" => $crateData, "particle" => $particle];
     }
     public function getFloatingText(string $name): ?array {
@@ -62,7 +62,7 @@ class CrateManager {
             $level->loadChunk($pos["x"] >> 4, $pos["z"] >> 4);
         }
         $ft->setInvisible(true);
-        $level->addParticle($ft);
+        $level->addParticle($ft, $level->getPlayers());
     }
     public function getAllCrates(): array {
         return $this->crates;
