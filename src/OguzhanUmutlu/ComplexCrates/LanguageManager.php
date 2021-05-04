@@ -19,7 +19,7 @@ class LanguageManager {
         ] as $lang) {
             $this->plugin->saveResource("languages/".$lang.".yml");
         }
-        $this->languageFile = (new Config($this->plugin->getDataFolder().$this->getLanguage().".yml"))->getAll();
+        $this->languageFile = (new Config($this->plugin->getDataFolder()."languages/".$this->getLanguage().".yml"))->getAll();
     }
     public function getLanguage(): string {
         return $this->plugin->getConfig()->getNested("language");
