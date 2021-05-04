@@ -36,6 +36,22 @@ class EventListener implements Listener {
             $this->plugin->getCrateManager()->createFloatingText($x["name"]);
         }
     }
+    public function onPlayerQuit(PlayerQuitEvent $e) {
+        foreach($this->plugin->getCrateManager()->getAllCrates() as $x) {
+            if($this->plugin->getCrateManager()->getFloatingText($x["name"])) {
+                $this->plugin->getCrateManager()->removeFloatingText($x["name"]);
+            }
+            $this->plugin->getCrateManager()->createFloatingText($x["name"]);
+        }
+    }
+    public function onLevelChange(EntityLevelChangeEvent $e) {
+        foreach($this->plugin->getCrateManager()->getAllCrates() as $x) {
+            if($this->plugin->getCrateManager()->getFloatingText($x["name"])) {
+                $this->plugin->getCrateManager()->removeFloatingText($x["name"]);
+            }
+            $this->plugin->getCrateManager()->createFloatingText($x["name"]);
+        }
+    }
     public function onBlockPlace(BlockPlaceEvent $e) {
         $item = $e->getItem();
         $block = $e->getBlock();
