@@ -102,6 +102,12 @@ class CrateCommand extends Command {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("command-givekeymenu-error1"));
                 return;
             }
+            if(isset(explode(",",$args[1])[1])) {
+                foreach(explode(",",$args[1]) as $x) {
+                    $this->plugin->getServer()->dispatchCommand($sender, $this->plugin->getConfig()->getNested("crate-command.name")." ".$args[0]." \"".$x."\" \"".$args[2]."\"");
+                }
+                return;
+            }
             $sender->sendMessage($this->plugin->getCrateManager()->giveKey($args[1], $args[2]));
         } else if($args[0] == $this->plugin->getLanguageManager()->translate("command-subcommands-givekeyall")) {
             if(!$sender->hasPermission("complexcrates.command.givekey-all")) {
@@ -118,6 +124,12 @@ class CrateCommand extends Command {
             }
             if(!isset($args[1])) {
                 $sender->sendMessage($this->plugin->getLanguageManager()->translate("command-givekeyallmenu-error"));
+                return;
+            }
+            if(isset(explode(",",$args[1])[1])) {
+                foreach(explode(",",$args[1]) as $x) {
+                    $this->plugin->getServer()->dispatchCommand($sender, $this->plugin->getConfig()->getNested("crate-command.name")." ".$args[0]." \"".$x."\"");
+                }
                 return;
             }
             $sender->sendMessage($this->plugin->getCrateManager()->giveKeyAll($args[1]));
